@@ -25,16 +25,16 @@ jobs:
     #       cat book.json
     #     fi
       
-    - name: Check ACTION_REPO
-      run: |
-        ACTION_REPO=$(echo ${{ github.repository }} | awk -F '/' '{print $2}')
-        if [[ $ACTION_REPO == '${{ github.actor }}.github.io' ]]; then
-          echo "Action in Page repository, do nothing."
-          echo "PAGE_REPO=true" >>$GITHUB_ENV
-        else
-          sed -i "s|${{ env.CNAME }}|${{ github.actor }}.github.io/$ACTION_REPO|" book.json
-          cat book.json
-        fi
+    # - name: Check ACTION_REPO
+    #   run: |
+    #     ACTION_REPO=$(echo ${{ github.repository }} | awk -F '/' '{print $2}')
+    #     if [[ $ACTION_REPO == '${{ github.actor }}.github.io' ]]; then
+    #       echo "Action in Page repository, do nothing."
+    #       echo "PAGE_REPO=true" >>$GITHUB_ENV
+    #     else
+    #       sed -i "s|${{ env.CNAME }}|${{ github.actor }}.github.io/$ACTION_REPO|" book.json
+    #       cat book.json
+    #     fi
 
     - name: Install nodejs
       if: ${{ env.PAGE_REPO != 'true' }}
